@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1
+CMAKE_SOURCE_DIR = /home/pcsdocker/Data/PCS_2026/esercitazione1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/build
+CMAKE_BINARY_DIR = /home/pcsdocker/Data/PCS_2026/esercitazione1/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ese1.dir/depend.make
@@ -73,32 +73,32 @@ CMakeFiles/ese1.dir/codegen:
 .PHONY : CMakeFiles/ese1.dir/codegen
 
 CMakeFiles/ese1.dir/ese1.cpp.o: CMakeFiles/ese1.dir/flags.make
-CMakeFiles/ese1.dir/ese1.cpp.o: /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/ese1.cpp
+CMakeFiles/ese1.dir/ese1.cpp.o: /home/pcsdocker/Data/PCS_2026/esercitazione1/ese1.cpp
 CMakeFiles/ese1.dir/ese1.cpp.o: CMakeFiles/ese1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ese1.dir/ese1.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ese1.dir/ese1.cpp.o -MF CMakeFiles/ese1.dir/ese1.cpp.o.d -o CMakeFiles/ese1.dir/ese1.cpp.o -c /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/ese1.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/pcsdocker/Data/PCS_2026/esercitazione1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ese1.dir/ese1.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ese1.dir/ese1.cpp.o -MF CMakeFiles/ese1.dir/ese1.cpp.o.d -o CMakeFiles/ese1.dir/ese1.cpp.o -c /home/pcsdocker/Data/PCS_2026/esercitazione1/ese1.cpp
 
 CMakeFiles/ese1.dir/ese1.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ese1.dir/ese1.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/ese1.cpp > CMakeFiles/ese1.dir/ese1.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pcsdocker/Data/PCS_2026/esercitazione1/ese1.cpp > CMakeFiles/ese1.dir/ese1.cpp.i
 
 CMakeFiles/ese1.dir/ese1.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ese1.dir/ese1.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/ese1.cpp -o CMakeFiles/ese1.dir/ese1.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pcsdocker/Data/PCS_2026/esercitazione1/ese1.cpp -o CMakeFiles/ese1.dir/ese1.cpp.s
 
 CMakeFiles/ese1.dir/ese1_functions.cpp.o: CMakeFiles/ese1.dir/flags.make
-CMakeFiles/ese1.dir/ese1_functions.cpp.o: /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/ese1_functions.cpp
+CMakeFiles/ese1.dir/ese1_functions.cpp.o: /home/pcsdocker/Data/PCS_2026/esercitazione1/ese1_functions.cpp
 CMakeFiles/ese1.dir/ese1_functions.cpp.o: CMakeFiles/ese1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ese1.dir/ese1_functions.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ese1.dir/ese1_functions.cpp.o -MF CMakeFiles/ese1.dir/ese1_functions.cpp.o.d -o CMakeFiles/ese1.dir/ese1_functions.cpp.o -c /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/ese1_functions.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/pcsdocker/Data/PCS_2026/esercitazione1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ese1.dir/ese1_functions.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ese1.dir/ese1_functions.cpp.o -MF CMakeFiles/ese1.dir/ese1_functions.cpp.o.d -o CMakeFiles/ese1.dir/ese1_functions.cpp.o -c /home/pcsdocker/Data/PCS_2026/esercitazione1/ese1_functions.cpp
 
 CMakeFiles/ese1.dir/ese1_functions.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ese1.dir/ese1_functions.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/ese1_functions.cpp > CMakeFiles/ese1.dir/ese1_functions.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pcsdocker/Data/PCS_2026/esercitazione1/ese1_functions.cpp > CMakeFiles/ese1.dir/ese1_functions.cpp.i
 
 CMakeFiles/ese1.dir/ese1_functions.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ese1.dir/ese1_functions.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/ese1_functions.cpp -o CMakeFiles/ese1.dir/ese1_functions.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pcsdocker/Data/PCS_2026/esercitazione1/ese1_functions.cpp -o CMakeFiles/ese1.dir/ese1_functions.cpp.s
 
 # Object files for target ese1
 ese1_OBJECTS = \
@@ -113,7 +113,7 @@ ese1: CMakeFiles/ese1.dir/ese1_functions.cpp.o
 ese1: CMakeFiles/ese1.dir/build.make
 ese1: CMakeFiles/ese1.dir/compiler_depend.ts
 ese1: CMakeFiles/ese1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ese1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/pcsdocker/Data/PCS_2026/esercitazione1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ese1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ese1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -125,6 +125,6 @@ CMakeFiles/ese1.dir/clean:
 .PHONY : CMakeFiles/ese1.dir/clean
 
 CMakeFiles/ese1.dir/depend:
-	cd /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1 /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1 /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/build /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/build /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/build/CMakeFiles/ese1.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/pcsdocker/Data/PCS_2026/esercitazione1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pcsdocker/Data/PCS_2026/esercitazione1 /home/pcsdocker/Data/PCS_2026/esercitazione1 /home/pcsdocker/Data/PCS_2026/esercitazione1/build /home/pcsdocker/Data/PCS_2026/esercitazione1/build /home/pcsdocker/Data/PCS_2026/esercitazione1/build/CMakeFiles/ese1.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/ese1.dir/depend
 

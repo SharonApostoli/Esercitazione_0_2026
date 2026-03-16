@@ -1,5 +1,5 @@
 CMakeFiles/ese1.dir/ese1.cpp.o: \
- /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/ese1.cpp \
+ /home/pcsdocker/Data/PCS_2026/esercitazione1/ese1.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/14/iostream \
  /usr/include/c++/14/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/14/bits/c++config.h \
@@ -168,4 +168,4 @@ CMakeFiles/ese1.dir/ese1.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/14/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/14/bits/c++io.h \
  /usr/include/c++/14/bits/fstream.tcc \
- /home/pcsdocker/Data/Esercitazione_0_2026/esercitazione1/ese1.h
+ /home/pcsdocker/Data/PCS_2026/esercitazione1/ese1.h
