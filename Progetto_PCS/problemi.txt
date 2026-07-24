@@ -92,3 +92,18 @@ Qui in seguito una lista dei problemi riscontrati:
     coalbero C = G \ T.
     Ho lasciato da trovare il modo per determinare con quale nodo dovrei iniziare
     la dfs nella recursive dfs e tutto il procedimento per calcolare i cicli.
+(24/07/2026)
+    Nella funzione cicli_fondamentali_dfs devo trovare un modo per poter
+    rappresentare i cicli fondamentali: cioè voglio una lista di nodi che
+    mi definiscono in maniera chiara l'ordine dei nodi da percorrere
+    per poter fare il cammino. Dopo diversi tentativi andati a male, faccio 
+    lo stesso ragionamento che mi ha portato a scegliere uno struct per 
+    Componenti. Creo quindi uno struct e lo chiamo cilcli, per ora ci metto
+    solo i nodi, poi se in futuro devo aggiungere qualcosa (il peso per
+    De Pina) mi viene più facile. Per ora sorvolo come trovare il modo per
+    far funzionare il recursive_dfs in cicli_fondamentali_dfs. Vado avanti
+    e ci ritorno in futuro.
+    Inizio a definire ora la matrice di indcidenza B.
+    Nella creazione della matrice di B ho dovuto trovare un modo per vedere 
+    se il grafo contiene o no l'arco e poi se quell'arco sta nel grafo devo 
+    controllare se rappresenta un resistore o un generatore.

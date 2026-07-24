@@ -26,7 +26,20 @@ struct Componente{
         valore = v;
         nodo_pos = np;
     }
+
+    //Funzione per vedere se un componente è resistore
+    bool is_resistore() const{
+        return !nome.empty() && nome[0] == 'R';
+    }
+    //Funzione per vedere se un componente è generatore
+    bool is_generatore() const{
+        return !nome.empty() && nome[0] == 'V';
+    }
 };
+
+struct Ciclo{
+    std::vector<int> nodi;
+}
 
 //Funzione per lettura e immagazzinazione dati dal file netlist
 void read_file(const std::string filename, unidirected_graph<T>& G);
@@ -169,6 +182,17 @@ public:
         return valori;
     }
 
+    std::vector<unidirected_edge<T>> archi_resistori() const{
+        std::vector<unidirected_edge<T>> res;
+
+        for(const auto& [arco, componente] : components){
+            if(componente.nome[0] == 'R'){
+                res.push_back(arco);
+            }
+        }
+        return res;
+    }
+
     Componente get_componente(const unidirected_edge<T>& edge) const{
         return components.at(edge);
     }
@@ -177,5 +201,11 @@ public:
     Componente get_componente(const T& from, const T& to) const{
         return get_componente(unidirected_edge<T>(from, to));
     }
+
+    bool has_edge(const T& a, const T& b) const{
+        return edge.count(unidirected_edge<T>(a.b)) > 0;
+    }
+    
+
 };
 

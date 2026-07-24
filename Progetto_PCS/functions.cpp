@@ -94,29 +94,70 @@ std::vector<int> find_path(const unidirected_graph<int>& T, int u, int v, ){
     return path;
 }
 
-cicli_fondamentali_dfs(const unidirected_graph<int>& G){
+std::vector<Ciclo> cicli_fondamentali_dfs(const unidirected_graph<int>& G){
+    //DA FINIREEEE!!!!  
     //Cominciamo con la creazione dell'abero di supporto (da definire come trovare v)
     unidirected_graph<int> T = recursive_dfs(G, v);
 
     //Coalbero
     unidirected_graph<int> C = G - T; 
 
+    //Struttura che contiene i cicli
+    std::vector<Ciclo> cicli;
+
     /*Per ogni arco del coalbero C trovo il perorso in T tale che 
     quel percorso + l'arco = ciclo (= maglia del circuito)*/
     for(const auto& edge : C.all_edges()){
-
+        std::vector<int> path = find_path(T, arco.from(), arco.to());
+        Ciclo c;
+        c.nodi = path;
+        cicli.push_back(c);
     }
 
+    return cicli;
 }
 
-
-
-
-
-template<typename T>
-Eigen::MatrixXd Rmatrix(const unidirected_graph<T>& G){
-    std::vector<T> resistori = G.valori_res();
-    
-    
+//Matrice delle resistenze R (mxm, diagonale)
+Eigen::MatrixXd Rmatrix(const unidirected_graph<int>& G){
+    std::vector<double> resistori = G.valori_res();
+    //Eigen non ha std::vector, quindi devo usare Eigen::Map per poter convertirlo in Eigen::VectorXd
+    Eigen::VectorXd resist = Eigen::Map<Eigen::VectorXd>(resistori.data(), resistori.size());
     return resist.asDiagonal();
+}
+
+//Matrice di incidenza B (mxn)
+Eigen::MatrixXd Bmatrix(const unidirected_graph<int>& G, ){
+    std::vector<unidirected_edge<int>> res_archi = G.archi_resistori();
+    //Cominziamo con una matrice di zeri
+    Eigen::MatrixXd B = Eigen::MatrixXd::Zero(m, n);
+    //Per poi modificare solo gli elementi che mi interessano
+    for(int j = 0; j < cicli.size(); j++){
+        int len = cicli[j].nodi.size();
+        for(step = 0; step < len; step++){
+            int node_u = cicli[j].nodi[step];
+            int node_v = cicli[j].nodi[(step + 1) % len];
+
+            //Se nel grafo non è presente l'aro fatto da u e v, prossima iterazione
+            if(!G.has_edge(node_u, node_v)){
+                continue;
+            }
+            Componente comp = G.get_componente(node_u, node_v);
+            //Qui controllo se l'arco preso è resistore o no
+            if(!comp.is_resistore()){
+                continue;
+            }
+
+            //Adesso determino il segno
+            for(int i = 0; i < res_archi.size(); i++){
+                if(res_archi[i] ==){
+                    if(  ){
+                        B(i, j) = +1.0;
+                    } else{
+                        B(i, j) = -1.0;
+                    }
+                }
+            }
+
+        }
+    }
 }
