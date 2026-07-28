@@ -9,7 +9,7 @@
 #include "progetto.h"
 
 
-void read_file(const std::string filename, unidirected_graph<int>& G){
+void read_file(const std::string& filename, unidirected_graph<int>& G){
     std::ifstream ifs(filename);
 
     //Controllo se il file è stato aperto correttamente
@@ -85,7 +85,7 @@ bool find_path_aiuto(const unidirected_graph<int>& T, int u, int v, std::vector<
     return false;
 }
 //Funzione principale
-std::vector<int> find_path(const unidirected_graph<int>& T, int u, int v, ){
+std::vector<int> find_path(const unidirected_graph<int>& T, int u, int v){
     std::vector<int> path;
     std::set<int> visited;
 
@@ -95,7 +95,6 @@ std::vector<int> find_path(const unidirected_graph<int>& T, int u, int v, ){
 }
 
 std::vector<Ciclo> cicli_fondamentali_dfs(const unidirected_graph<int>& G){
-    //DA FINIREEEE!!!!  
     //Cominciamo con la creazione dell'abero di supporto (da definire come trovare v)
     unidirected_graph<int> T = recursive_dfs(G, v);
 
@@ -108,7 +107,7 @@ std::vector<Ciclo> cicli_fondamentali_dfs(const unidirected_graph<int>& G){
     /*Per ogni arco del coalbero C trovo il perorso in T tale che 
     quel percorso + l'arco = ciclo (= maglia del circuito)*/
     for(const auto& edge : C.all_edges()){
-        std::vector<int> path = find_path(T, arco.from(), arco.to());
+        std::vector<int> path = find_path(T, edge.from(), edge.to());
         Ciclo c;
         c.nodi = path;
         cicli.push_back(c);
@@ -126,14 +125,14 @@ Eigen::MatrixXd Rmatrix(const unidirected_graph<int>& G){
 }
 
 //Matrice di incidenza B (mxn)
-Eigen::MatrixXd Bmatrix(const unidirected_graph<int>& G, ){
+Eigen::MatrixXd Bmatrix(const unidirected_graph<int>& G, const std::vector<Ciclo>& cicli){
     std::vector<unidirected_edge<int>> res_archi = G.archi_resistori();
     //Cominziamo con una matrice di zeri
-    Eigen::MatrixXd B = Eigen::MatrixXd::Zero(m, n);
+    Eigen::MatrixXd B = Eigen::MatrixXd::Zero(res_archi.size(), cicli.size());
     //Per poi modificare solo gli elementi che mi interessano
     for(int j = 0; j < cicli.size(); j++){
         int len = cicli[j].nodi.size();
-        for(step = 0; step < len; step++){
+        for(int step = 0; step < len; step++){
             int node_u = cicli[j].nodi[step];
             int node_v = cicli[j].nodi[(step + 1) % len];
 
@@ -148,16 +147,48 @@ Eigen::MatrixXd Bmatrix(const unidirected_graph<int>& G, ){
             }
 
             //Adesso determino il segno
+            unidirected_edge<int> arco(node_u, node_v);
             for(int i = 0; i < res_archi.size(); i++){
-                if(res_archi[i] ==){
-                    if(  ){
+                if(res_archi[i] == arco){
+                    if(node_u == arco.from()){
                         B(i, j) = +1.0;
                     } else{
                         B(i, j) = -1.0;
                     }
+                    break;
                 }
             }
 
         }
     }
+    return B;
+}
+
+Eigen::VectorXd termini_noti(const unidirected_graph<int>& G, const std::vector<Ciclo>& cicli){
+    Eigen::VectorXd v = Eigen::VectorXd::Zero(cicli.size());
+
+    //Stesso ragionamento per il for della matrice b
+    for(int j = 0; j < cicli.size(); j++){
+        int len = cicli[j].nodi.size();
+        for(int step = 0; step < len; step++){
+            int node_u = cicli[j].nodi[step];
+            int node_v = cicli[j].nodi[(step + 1) % len];
+
+            if(!G.has_edge(node_u, node_v)){
+                continue;
+            }
+            Componente comp = G.get_componente(node_u, node_v);
+            if(!comp.is_generatore()){
+                continue;
+            }
+
+            //Adesso assegno il segno: se arrivo al +, vado da - a + -> +v, altrimenti -v
+            if(node_v == comp.nodo_pos){
+                v(j) += comp.valore;
+            }else{
+                v(j) -= comp.valore;
+            }
+        }
+    }
+    return v;
 }

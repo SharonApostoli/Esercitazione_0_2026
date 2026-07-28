@@ -1,12 +1,15 @@
 #pragma once
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <vector>
 #include <optional>
 #include <string>
 #include <map>
 #include <set>
 #include <string>
+#include <Eigen/Dense>
 
 
 struct Componente{
@@ -39,10 +42,8 @@ struct Componente{
 
 struct Ciclo{
     std::vector<int> nodi;
-}
+};
 
-//Funzione per lettura e immagazzinazione dati dal file netlist
-void read_file(const std::string filename, unidirected_graph<T>& G);
 
 template<typename T>
 class unidirected_edge{
@@ -113,14 +114,12 @@ public:
         return key -> second;
     }
 
-    void add_edge(const T& a,const T& b, const std::string& nome, double valore){
+    void add_edge(const T& a,const T& b, const std::string& nome, double valore, int nodo_pos = 0){
         unidirected_edge<T> arco(a, b);
         if(edge.find(arco) != edge.end()){
             return;
         }
         edge.insert(arco);
-
-        components[arco] = Componente(nome, valore, nodo_pos)
 
         int w = edge_number(arco);
         components[arco] = Componente(nome, valore, nodo_pos);
@@ -165,7 +164,7 @@ public:
         for(const unidirected_edge<T>& el : edge){
             if(other.edge.find(el) == other.edge.end()){
                 Componente comp = components.at(el);
-                archi.add_edge(el.from(), el.to(), comp.nome, comp.valore);
+                archi.add_edge(el.from(), el.to(), comp.nome, comp.valore, comp.nodo_pos);
             }
         }
         return archi;  
@@ -203,9 +202,27 @@ public:
     }
 
     bool has_edge(const T& a, const T& b) const{
-        return edge.count(unidirected_edge<T>(a.b)) > 0;
+        return edge.count(unidirected_edge<T>(a,b)) > 0;
     }
-    
-
 };
 
+//Funzione per lettura e immagazzinazione dati dal file netlist
+void read_file(const std::string& filename, unidirected_graph<int>& G);
+
+void recursive_dfs_aiuto(const unidirected_graph<int>& G, int v, unidirected_graph<int>& tree, std::set<int>& visited);
+
+unidirected_graph<int> recursive_dfs(const unidirected_graph<int>& G, int v);
+
+bool find_path_aiuto(const unidirected_graph<int>& T, int u, int v, std::vector<int>& path, std::set<int>& visited);
+
+std::vector<int> find_path(const unidirected_graph<int>& T, int u, int v);
+
+std::vector<Ciclo> cicli_fondamentali_dfs(const unidirected_graph<int>& G);
+
+//MANCA DE PINA
+
+Eigen::MatrixXd Rmatrix(const unidirected_graph<int>& G);
+
+Eigen::MatrixXd Bmatrix(const unidirected_graph<int>& G, const std::vector<Ciclo>& cicli);
+
+Eigen::VectorXd termini_noti(const unidirected_graph<int>& G, const std::vector<Ciclo>& cicli);

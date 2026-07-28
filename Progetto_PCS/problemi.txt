@@ -107,3 +107,10 @@ Qui in seguito una lista dei problemi riscontrati:
     Nella creazione della matrice di B ho dovuto trovare un modo per vedere 
     se il grafo contiene o no l'arco e poi se quell'arco sta nel grafo devo 
     controllare se rappresenta un resistore o un generatore.
+(28/07/2026)
+    Ho finito a scrivere la funzione per i termini noti e ho scritto anche 
+    il main. Ho inoltre riscritto definizioni delle funzioni nel file
+    progetto.h e ricontrollato la grammatica di quello che è stato fatto
+    fino ad ora. Manca da scrivere l'algoritmo di de pina, scrivere il modo
+    per definire il nodo con cui si inizia il dfs, controllare CMakeLists e 
+    ovviamente ricontrollare poi tutto.
