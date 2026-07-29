@@ -114,3 +114,11 @@ Qui in seguito una lista dei problemi riscontrati:
     fino ad ora. Manca da scrivere l'algoritmo di de pina, scrivere il modo
     per definire il nodo con cui si inizia il dfs, controllare CMakeLists e 
     ovviamente ricontrollare poi tutto.
+(29/07/2026)
+    Per quanto riguarda la dfs ho scelto di cercare di prendere sempre il
+    nodo con l'indice piu piccolo: quindi ho preo il grafo G, con G.all_nodes()
+    ho il set (ordinato) dei nodi, faccio poi G.all_nodes().begin() e prendo il
+    "primo" nodo e poi metto il deferenziatore *.
+    Passiamo infine a De Pina. Ho intanto iniziato a scrivere una scaletta
+    per il procedimento, cosi da cercare di dividere il problema in sezioni
+    èiu piccole che poi cerco di mettere insieme.

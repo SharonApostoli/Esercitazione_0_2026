@@ -95,8 +95,8 @@ std::vector<int> find_path(const unidirected_graph<int>& T, int u, int v){
 }
 
 std::vector<Ciclo> cicli_fondamentali_dfs(const unidirected_graph<int>& G){
-    //Cominciamo con la creazione dell'abero di supporto (da definire come trovare v)
-    unidirected_graph<int> T = recursive_dfs(G, v);
+    //Cominciamo con la creazione dell'abero di supporto
+    unidirected_graph<int> T = recursive_dfs(G, *G.all_nodes().begin());
 
     //Coalbero
     unidirected_graph<int> C = G - T; 
@@ -114,6 +114,46 @@ std::vector<Ciclo> cicli_fondamentali_dfs(const unidirected_graph<int>& G){
     }
 
     return cicli;
+}
+
+//Algoritmo De Pina
+//Funzioni Aiuto:
+//Prodotto Scalare (mod 2)
+int dot_mod2(const std::vector<int>& a, const std::vector<int>& b){
+    int s = 0;
+    for(int i = 0; i < a.size(); i++){
+        s ^= (a[i] & b[i]);
+    }
+    return s;
+}
+
+//Differenza simmetrica
+std::vector<int> diff_simm(const std::vector<int>& a, const std::vector<int>& b){
+    //Creo un vettore dove metto i risultati
+    std::vector<int> r(a.size());
+    for(int i = 0; i < a.size(); i++){
+        r[i] = a[i] ^ b[i];
+    }
+    return r;
+}
+
+std::vector<Ciclo> cicli_de_pina(const unidirected_graph<int>& G){
+    //Albero di DFS e coalbero
+    unidirected_graph<int> T = recursive_dfs(G, *G.all_nodes().begin());
+    unidirected_graph<int> C = G - T;
+
+    std::vector<Ciclo> base;
+
+    //Archi in ordine lessicografico
+    
+
+
+    //Inizializzo i vettori S
+
+    //Ciclo for: trovo camm. min., calcolo vettore incidenza, aggiungo C alla basa, aggiorno S
+
+    //Restituisco la base
+    return base;
 }
 
 //Matrice delle resistenze R (mxm, diagonale)
