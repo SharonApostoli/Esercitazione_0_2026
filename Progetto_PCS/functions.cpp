@@ -137,21 +137,81 @@ std::vector<int> diff_simm(const std::vector<int>& a, const std::vector<int>& b)
     return r;
 }
 
+//Lifting del grafo
+lifting(const unidirected_graph<int>& G, const std::vector<unidirected_edge<int>>& edge_list ){
+    //1. Prendi tutti i vertici v nel grafo G e duplicali (v+ e v-)
+    std::vector<int> nodes(G.all_nodes().begin(), G.all_nodes.().end());
+    int n = nodes.size();
+    int m = edge_list.size();
+    std::map<int, int> nodo_indice;
+    for(int i = 0; i < n; i++){
+        nodo_indice[nodes[i]] = i;
+    }
+    //2. Per ogni edge(u, v) in G
+        //Se edge è attivo in S[i], aggiungi a G' (u+, v-) e (u-, v+)
+        //Caso contrario aggiungi a G' (u+, v+) e (u-, v-)
+    
+    //3. Per ogni vertive v in G
+        //Calcola il cammino minimi (Dijkstra) tra v- e v+ in G'
+
+    //4. I cammini trovati includono nodi "positivi" e "negativi".
+    //   Per ogni cammino
+            //Costruisci un vettore incidenza C_mu di lunghezza |E|, in cui
+            //Per ogni occorrenza di (u, v)[pos o neg] si incrementa modulo 2 l'elemento relativo all'arco (u, v)
+
+    //5. Di tutti i C_mu trovati, conserviamo quello con il piu piccolo
+    //  numero di elementi 1. Questo sarà il vettore C_i che cerchiamo
+}
+
 std::vector<Ciclo> cicli_de_pina(const unidirected_graph<int>& G){
     //Albero di DFS e coalbero
     unidirected_graph<int> T = recursive_dfs(G, *G.all_nodes().begin());
     unidirected_graph<int> C = G - T;
 
-    std::vector<Ciclo> base;
+    //Archi in ordine lessicografico (uso vector perche mi serve indicizzare s)
+    std::vector<unidirected_edge<int>> edge_list(G.all_nodes().begin(), G.all_nodes().end());
 
-    //Archi in ordine lessicografico
+    //k vettori booleani di lunghezza m
+    int k = C.all_edges().size();
+    int m = edge_list.size();
     
-
-
     //Inizializzo i vettori S
+    std::vector<std::vector<int>> S(k, std::vector<int>(m, 0));
+    int indice = 0;
+    for(const auto& arco : C.all_edges()){
+        S[indice][G.edge_number(arco)] = 1;
+        indice++;
+    }
 
-    //Ciclo for: trovo camm. min., calcolo vettore incidenza, aggiungo C alla basa, aggiorno S
+    std::vector<Ciclo> base;
+    //Ciclo for: trovo camm. min., calcolo vettore incidenza, aggiungo C alla base, aggiorno S
+    for(int i = 0; i < k; i++){
+        //trovo ciclo minimo
+        //DA FINIRE A SCRIVERE!!!
+        Ciclo ci = 
 
+        //calcolo vettore incidenza
+        std::vector<int> inci(m, 0);
+        int len = ci.nodi.size();
+        for(int j = 0; j < len; j++){
+            unidirected_edge<int> e(ci.nodi[j], ci.nodi[(j + 1)  len]);
+            int e_indice = G.edge_number(e);
+            if(e_indice >= 0){
+                inci[e_indice] ^= 1;
+            }
+        }
+
+        //aggiungo c alla base
+        base.push_back(ci);
+
+        //aggiorno S
+        for(int w = i + 1; w < k; w++){
+            if(dot_mod2(inci, S[w]) == 1){
+                S[w] = diff_simm(S[w], S[i]);
+            }
+        }
+    }
+    
     //Restituisco la base
     return base;
 }
