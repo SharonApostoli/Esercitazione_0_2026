@@ -138,7 +138,7 @@ std::vector<int> diff_simm(const std::vector<int>& a, const std::vector<int>& b)
 }
 
 //Lifting del grafo
-lifting(const unidirected_graph<int>& G, const std::vector<unidirected_edge<int>>& edge_list ){
+Ciclo lifting(const unidirected_graph<int>& G, const std::vector<unidirected_edge<int>>& edge_list, const std::vector<int>& S){
     //1. Prendi tutti i vertici v nel grafo G e duplicali (v+ e v-)
     std::vector<int> nodes(G.all_nodes().begin(), G.all_nodes.().end());
     int n = nodes.size();
@@ -147,20 +147,104 @@ lifting(const unidirected_graph<int>& G, const std::vector<unidirected_edge<int>
     for(int i = 0; i < n; i++){
         nodo_indice[nodes[i]] = i;
     }
+
     //2. Per ogni edge(u, v) in G
-        //Se edge è attivo in S[i], aggiungi a G' (u+, v-) e (u-, v+)
-        //Caso contrario aggiungi a G' (u+, v+) e (u-, v-)
-    
-    //3. Per ogni vertive v in G
+    //Faccio un vettore di dim 2n cosi ho nello stesso vettore sia i v+ che i v-
+    //Poi li distinguo con i primi n elementi sono i positivi, dopo ci sono i negativi
+    int N2 = 2 * n;
+    std::vector<std::vector<std::pair<int, double>>> adj(N2);
+
+    for(int ei = 0; ei < m; ei++){
+        int u = nodo_indice[edge_list[ei].from()];
+        int v = nodo_indice[edge_list[ei].to()];
+        //Peso unitario (voglio il ciclo con il minor numero di archi, non peso minimo)
+        double w = 1.0;
+        if(S[ei] == 1){
+            //Se edge è attivo in S[i], aggiungi a G' (u+, v-) e (u-, v+)
+            adj[u].push_back({v+n, w});
+            adj[v+n].push_back({u, w});
+            adj[v].push_back({u+n, w});
+            adj[u+n].push_back({v, w});
+        }else{
+            //Caso contrario aggiungi a G' (u+, v+) e (u-, v-)
+            adj[u].push_back({v, w});
+            adj[v+n].push_back({u+n, w});
+            adj[v].push_back({u, w});
+            adj[u+n].push_back({v+n, w});
+        }
+    }
+        
+        
+    //3. Per ogni vertice v in G
+    const double INF = std::numeric_limits<double>::max();
+    double best = INF;
+    int best_src = -1;
+    std::vector<intZ best_perv;
+    for(int s = 0; s < n; s++){
         //Calcola il cammino minimi (Dijkstra) tra v- e v+ in G'
+        std::vector<double> dist(N2, INF);
+        std::vector<int> prev(N2, -1);
+        dist[s] = 0.0;
+        std::priority_queue<std::pair<double, int>, std::vector<std::pair<double, int>>, std::greater<std::pair<double, int>> > pq;
+        pq.push({0.0, s});
+
+        while(!pq.empty()){
+            auto [current_dist, u] = pq.top();
+            pq.pop();
+
+            if(current_dits > dist[u]){
+                continue;
+            }
+
+            for(auto [vicino, w] : adj[u]){
+                if(dist[u] + w < dist[vicino]){
+                    dist[vicino] = dist[u] + w;
+                    prev[vicino] = u;
+                    pq.push({dist[vicino], vicino});
+                }
+            }
+        }
+        //ora sto cercando il percorso migliore
+        if(dist[s + n] < best){
+            //Se lo trovo, aggiorno i dati:
+            //distanza minima
+            best = dist[s + n];
+            //predecessori
+            best_prev = prev;
+            //nodo sorgente
+            est_src = s;
+        }
+    }
 
     //4. I cammini trovati includono nodi "positivi" e "negativi".
     //   Per ogni cammino
             //Costruisci un vettore incidenza C_mu di lunghezza |E|, in cui
             //Per ogni occorrenza di (u, v)[pos o neg] si incrementa modulo 2 l'elemento relativo all'arco (u, v)
 
+    Ciclo c;
+    if(nest_src == -1 || best >= INf){
+        return c;
+    }
+
+    std::vector<int> lifted_path;
+    int cur = best_src + n;
+    while(cur != -1){
+        lifted:path.push_back(cur);
+        if(cur == best:src){
+            break;
+        }
+        cur = best:prev[cur];
+    }
+    //inverto i nodi (il percorso l'ho costruito al contrario)
+    std::reverse (lifted_pah.begin(), lifted_path.end());
+    for(in lv : lifted_path){
+        c.nodi.push_back(nodes[lv % n]);
+    }
+
+   
     //5. Di tutti i C_mu trovati, conserviamo quello con il piu piccolo
-    //  numero di elementi 1. Questo sarà il vettore C_i che cerchiamo
+    //  numero di elementi 1. Questo sarà il vettore C_i che cerchiamo, garantito da Dijkstra
+    return c;
 }
 
 std::vector<Ciclo> cicli_de_pina(const unidirected_graph<int>& G){
