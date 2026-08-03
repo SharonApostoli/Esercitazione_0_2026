@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wshadow -Werror=vla -Wl,--dependency-file=CMakeFiles/progetto.dir/link.d CMakeFiles/progetto.dir/progetto.cpp.o CMakeFiles/progetto.dir/functions.cpp.o -o progetto

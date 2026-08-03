@@ -17,9 +17,9 @@ int main(int argc, char **argv){
     std::vector<Ciclo> cicli = cicli_fondamentali_dfs(G);
 
     //Costruisco le matrici
-    Eigen::MatrixXd R = Rmatrix();
-    Eigen::MatrixXd B = Bmatrix();
-    Eigen::VectorXd v = termini_noti();
+    Eigen::MatrixXd R = Rmatrix(G);
+    Eigen::MatrixXd B = Bmatrix(G, cicli);
+    Eigen::VectorXd v = termini_noti(G, cicli);
 
     //Risolvo il sist. lin. (B^T R B i = v)
     Eigen::MatrixXd A = B.transpose() * R * B;

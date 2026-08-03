@@ -8,7 +8,6 @@
 #include <string>
 #include <map>
 #include <set>
-#include <string>
 #include <Eigen/Dense>
 
 
@@ -192,8 +191,8 @@ public:
         return res;
     }
 
-    Componente get_componente(const unidirected_edge<T>& edge) const{
-        return components.at(edge);
+    Componente get_componente(const unidirected_edge<T>& e) const{
+        return components.at(e);
     }
 
     //Questo mi serve nel caso in cui gli passo i nodi
@@ -219,6 +218,13 @@ std::vector<int> find_path(const unidirected_graph<int>& T, int u, int v);
 
 std::vector<Ciclo> cicli_fondamentali_dfs(const unidirected_graph<int>& G);
 
+int dot_mod2(const std::vector<int>& a, const std::vector<int>& b);
+
+std::vector<int> diff_simm(const std::vector<int>& a, const std::vector<int>& b);
+
+Ciclo lifting(const unidirected_graph<int>& G, const std::vector<unidirected_edge<int>>& edge_list, const std::vector<int>& S);
+
+std::vector<Ciclo> cicli_de_pina(const unidirected_graph<int>& G);
 //MANCA DE PINA
 
 Eigen::MatrixXd Rmatrix(const unidirected_graph<int>& G);

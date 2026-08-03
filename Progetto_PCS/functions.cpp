@@ -5,6 +5,7 @@
 #include <set>
 #include <Eigen/Dense>
 #include <Eigen/SVD>
+#include <queue>
 
 #include "progetto.h"
 
@@ -140,7 +141,7 @@ std::vector<int> diff_simm(const std::vector<int>& a, const std::vector<int>& b)
 //Lifting del grafo
 Ciclo lifting(const unidirected_graph<int>& G, const std::vector<unidirected_edge<int>>& edge_list, const std::vector<int>& S){
     //1. Prendi tutti i vertici v nel grafo G e duplicali (v+ e v-)
-    std::vector<int> nodes(G.all_nodes().begin(), G.all_nodes.().end());
+    std::vector<int> nodes(G.all_nodes().begin(), G.all_nodes().end());
     int n = nodes.size();
     int m = edge_list.size();
     std::map<int, int> nodo_indice;
@@ -179,7 +180,7 @@ Ciclo lifting(const unidirected_graph<int>& G, const std::vector<unidirected_edg
     const double INF = std::numeric_limits<double>::max();
     double best = INF;
     int best_src = -1;
-    std::vector<intZ best_perv;
+    std::vector<int> best_prev;
     for(int s = 0; s < n; s++){
         //Calcola il cammino minimi (Dijkstra) tra v- e v+ in G'
         std::vector<double> dist(N2, INF);
@@ -192,7 +193,7 @@ Ciclo lifting(const unidirected_graph<int>& G, const std::vector<unidirected_edg
             auto [current_dist, u] = pq.top();
             pq.pop();
 
-            if(current_dits > dist[u]){
+            if(current_dist > dist[u]){
                 continue;
             }
 
@@ -212,7 +213,7 @@ Ciclo lifting(const unidirected_graph<int>& G, const std::vector<unidirected_edg
             //predecessori
             best_prev = prev;
             //nodo sorgente
-            est_src = s;
+            best_src = s;
         }
     }
 
@@ -222,22 +223,22 @@ Ciclo lifting(const unidirected_graph<int>& G, const std::vector<unidirected_edg
             //Per ogni occorrenza di (u, v)[pos o neg] si incrementa modulo 2 l'elemento relativo all'arco (u, v)
 
     Ciclo c;
-    if(nest_src == -1 || best >= INf){
+    if(best_src == -1 || best >= INF){
         return c;
     }
 
     std::vector<int> lifted_path;
     int cur = best_src + n;
     while(cur != -1){
-        lifted:path.push_back(cur);
-        if(cur == best:src){
+        lifted_path.push_back(cur);
+        if(cur == best_src){
             break;
         }
-        cur = best:prev[cur];
+        cur = best_prev[cur];
     }
     //inverto i nodi (il percorso l'ho costruito al contrario)
-    std::reverse (lifted_pah.begin(), lifted_path.end());
-    for(in lv : lifted_path){
+    std::reverse (lifted_path.begin(), lifted_path.end());
+    for(int lv : lifted_path){
         c.nodi.push_back(nodes[lv % n]);
     }
 
@@ -253,7 +254,7 @@ std::vector<Ciclo> cicli_de_pina(const unidirected_graph<int>& G){
     unidirected_graph<int> C = G - T;
 
     //Archi in ordine lessicografico (uso vector perche mi serve indicizzare s)
-    std::vector<unidirected_edge<int>> edge_list(G.all_nodes().begin(), G.all_nodes().end());
+    std::vector<unidirected_edge<int>> edge_list(G.all_edges().begin(), G.all_edges().end());
 
     //k vettori booleani di lunghezza m
     int k = C.all_edges().size();
@@ -271,14 +272,13 @@ std::vector<Ciclo> cicli_de_pina(const unidirected_graph<int>& G){
     //Ciclo for: trovo camm. min., calcolo vettore incidenza, aggiungo C alla base, aggiorno S
     for(int i = 0; i < k; i++){
         //trovo ciclo minimo
-        //DA FINIRE A SCRIVERE!!!
-        Ciclo ci = 
+        Ciclo ci = lifting(G, edge_list, S[i]);
 
         //calcolo vettore incidenza
         std::vector<int> inci(m, 0);
         int len = ci.nodi.size();
         for(int j = 0; j < len; j++){
-            unidirected_edge<int> e(ci.nodi[j], ci.nodi[(j + 1)  len]);
+            unidirected_edge<int> e(ci.nodi[j], ci.nodi[(j + 1) % len]);
             int e_indice = G.edge_number(e);
             if(e_indice >= 0){
                 inci[e_indice] ^= 1;
